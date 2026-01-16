@@ -6,6 +6,8 @@
 #include <bn_sprite_items_dot.h>
 #include <bn_log.h>
 #include <bn_vector.h>
+#include <bn_math.h>
+#include <bn_fixed.h>
 
 int main()
 {
@@ -13,9 +15,12 @@ int main()
     bn::backdrop::set_color(bn::color(20, 20, 31));
 
     bn::vector<bn::sprite_ptr, 10> circles = {};
-    for (int x = -40; x < 40; x += 10)
+
+    for (bn::fixed theta = 0.1; theta < 1.0; theta += 0.1)
     {
-        bn::sprite_ptr newCircle = bn::sprite_items::dot.create_sprite(x, 40);
+        bn::fixed targetX = 15 * bn::sin(theta);
+        bn::fixed targetY = 15 * bn::cos(theta);
+        bn::sprite_ptr newCircle = bn::sprite_items::dot.create_sprite(targetX, targetY);
         circles.push_back(newCircle);
     }
 
@@ -33,6 +38,8 @@ int main()
         {
             bn::backdrop::set_color(bn::color(20, 20, 31));
         }
+        for (int i = 0; i < circles.size(); i++)
+        {
+        }
         bn::core::update();
     }
-}
