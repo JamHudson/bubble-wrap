@@ -44,13 +44,26 @@ int main()
         else
         {
             bn::backdrop::set_color(bn::color(20, 20, 31));
-            theta = 0.0;
         }
+        if (theta > 1)
+            theta = 0;
+        else if (theta < 0)
+            theta = 1;
         for (int i = 0; i < circles.size(); i++)
         {
             bn::sprite_ptr circle = circles.at(i);
             bn::fixed targetX = 15 * bn::sin(theta + (i * 0.1));
             bn::fixed targetY = 15 * bn::cos(theta + (i * 0.1));
+            bn::fixed targetRotation = 360 * theta + (36 * i);
+            if (targetRotation > 360)
+            {
+                targetRotation = targetRotation - 360;
+            }
+            else if (targetRotation < 0)
+            {
+                targetRotation = targetRotation + 360;
+            }
+            circle.set_rotation_angle(targetRotation);
             circle.set_x(targetX);
             circle.set_y(targetY);
         }
