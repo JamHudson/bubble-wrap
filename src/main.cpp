@@ -8,6 +8,7 @@
 #include <bn_vector.h>
 #include <bn_math.h>
 #include <bn_fixed.h>
+#include <bn_log.h>
 
 int main()
 {
@@ -21,6 +22,9 @@ int main()
         bn::fixed targetX = 15 * bn::sin(theta);
         bn::fixed targetY = 15 * bn::cos(theta);
         bn::sprite_ptr newCircle = bn::sprite_items::dot.create_sprite(targetX, targetY);
+        newCircle.set_scale(0.75);
+        newCircle.set_vertical_scale(1.5);
+        newCircle.set_rotation_angle(360 * theta);
         circles.push_back(newCircle);
     }
 
